@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[CSS-高度坍塌问题]]></title>
+    <url>%2F2019%2F03%2F29%2FCSS-%E9%AB%98%E5%BA%A6%E5%9D%8D%E5%A1%8C%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[浮动塌陷如果父元素只包含浮动元素,且未设置高度,那么它的高度将坍塌为0.因为浮动元素脱离了文档流,包含他们的父块没有内容,发生塌陷. 解决方案 使用clear属性的空元素 1&lt;div style=&quot;clear:both&quot;&gt;&lt;/div&gt; 使用css的overflow属性 给浮动元素的容器添加: 1overflow:hidden||auto; 给浮动元素的容器添加浮动 使用css的:after伪元素(推荐使用)123.cf:after &#123; clear: both;&#125;]]></content>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+</search>

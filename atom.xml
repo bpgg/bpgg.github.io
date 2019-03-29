@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>一蓑烟雨任平生.</title>
+  
+  <subtitle>stay hungry , stay foolish</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-03-29T09:47:38.644Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>李瑞恒</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CSS-高度坍塌问题</title>
+    <link href="http://yoursite.com/2019/03/29/CSS-%E9%AB%98%E5%BA%A6%E5%9D%8D%E5%A1%8C%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2019/03/29/CSS-高度坍塌问题/</id>
+    <published>2019-03-29T09:20:42.000Z</published>
+    <updated>2019-03-29T09:47:38.644Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="浮动塌陷"><a href="#浮动塌陷" class="headerlink" title="浮动塌陷"></a>浮动塌陷</h3><p>如果父元素只包含浮动元素,且未设置高度,那么它的高度将坍塌为0.因为浮动元素脱离了文档流,包含他们的父块没有内容,发生塌陷.</p><h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ul><li><p>使用clear属性的空元素</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&quot;clear:both&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure></li><li><p>使用css的overflow属性<br> 给浮动元素的容器添加: </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">overflow:hidden||auto;</span><br></pre></td></tr></table></figure></li><li><p>给浮动元素的容器添加浮动</p></li></ul><ul><li>使用css的:after伪元素(推荐使用)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.cf:after &#123;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;浮动塌陷&quot;&gt;&lt;a href=&quot;#浮动塌陷&quot; class=&quot;headerlink&quot; title=&quot;浮动塌陷&quot;&gt;&lt;/a&gt;浮动塌陷&lt;/h3&gt;&lt;p&gt;如果父元素只包含浮动元素,且未设置高度,那么它的高度将坍塌为0.因为浮动元素脱离了文档流,包含他们的父块没有内容,发生塌陷.
+      
+    
+    </summary>
+    
+    
+      <category term="css" scheme="http://yoursite.com/tags/css/"/>
+    
+  </entry>
+  
+</feed>
