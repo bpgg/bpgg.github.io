@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-03-30T02:09:17.759Z</updated>
+  <updated>2019-03-30T02:15:32.584Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[PHP]-PDO</title>
+    <link href="http://yoursite.com/2019/03/30/pdo/"/>
+    <id>http://yoursite.com/2019/03/30/pdo/</id>
+    <published>2019-03-30T02:05:16.000Z</published>
+    <updated>2019-03-30T02:15:32.584Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="PDO简介"><a href="#PDO简介" class="headerlink" title="PDO简介"></a>PDO简介</h3><ul><li>PDO: php data object</li><li>主要功能: 代替数据库操作类<br></li></ul><h4 id="PDO连接mysql"><a href="#PDO连接mysql" class="headerlink" title="PDO连接mysql"></a>PDO连接mysql</h4><ul><li><p>语法: <br><br><code>PDO::_construct(string $dsn[,string $username[,string $password]])</code><br></p><ul><li>$dsn:”dbtype:host=127.0.0.1;port=3306;dbname=itcast;charset=utf8”</li></ul></li><li><p>PDO常用方法</p><ol><li>exec() 执行一条sql语句,返回受影响的行数  </li><li>query() 执行select,show语句,并返回一个结果集对象(PDOStatement)</li><li>lastInsertId() 获取插入的记录的ID值</li><li>setAttribute() 设置属性<br><br> <code>语法:bool PDO::setAttribute(int $attribute,mixed $value)</code></li></ol></li><li><p>PDOStatement结果集对象常用方法:</p><ol><li><p>fetch() 获取结果集的一条记录,指针自动跳转<br><br> <code>mixed  PDOStatement::fetch([int $fetch_style])</code></p></li><li><p>fetchAll() 获取结果集的多条记录</p></li><li>fetchColumn() 返回结果集的单独一列,默认为0</li><li>rowCount() 返回受上一个sql语句影响的行数</li></ol><ul><li>常用foreach遍历  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foreach($PDOStatement as $arr)&#123;</span><br><span class="line">    print_r($arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul></li></ul><h4 id="PDO错误处理模式"><a href="#PDO错误处理模式" class="headerlink" title="PDO错误处理模式:"></a>PDO错误处理模式:</h4><ul><li>错误处理概述<ul><li>静默模式:不显示任何错误(默认)</li><li>警告模式:用PHP的错误等级来报告信息</li><li>异常模式:先抛出异常,再处理异常</li></ul></li><li>静默模式<br>  获取错误信息函数<br><ol><li>PDO:errorCode(); 获取状态错误码.[00000]正常</li><li>PDO:errorInfo(); 获取错误信息</li></ol></li><li>警告模式<ul><li>必须先设置错误报告模式(在网页直接显示错误或者警告信息)<br><br>  <code>$pdo-&gt;setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);</code></li></ul></li><li>异常模式  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">    //要执行的sql语句</span><br><span class="line">&#125;catch(PDOException $e)&#123;</span><br><span class="line">    ehco &quot;错误行号:&quot;.$e-&gt;getLine();</span><br><span class="line">    ehco &quot;&lt;br&gt;错误文件:&quot;.$e-&gt;getFile();</span><br><span class="line">    ehco &quot;&lt;br&gt;错误状态码:&quot;.$e-&gt;getCode();</span><br><span class="line">    ehco &quot;&lt;br&gt;错误信息:&quot;.$e-&gt;getMessage();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><h4 id="PDO预处理模式"><a href="#PDO预处理模式" class="headerlink" title="PDO预处理模式"></a>PDO预处理模式</h4><ul><li>sql语句的执行(编译和执行)</li><li>如果是第一次执行,先编译后执行,切编译过程非常复杂</li><li>如果是第二次执行(相同sql语句),直接从缓存中读取,效率高,安全,有效防止sql语句注入.</li></ul><h5 id="预处理步骤"><a href="#预处理步骤" class="headerlink" title="预处理步骤"></a>预处理步骤</h5><ul><li>先提取相同结构语句</li><li>编译结构,保存结果</li><li>再将不同数据部分替换 </li><li>执行预处理语句</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//(1)使用占位符&quot;:value&quot;来代替真正的数据</span><br><span class="line"> $sql = &quot;INSERT INTO user(username,password) VALUES(:username,:password)&quot;;</span><br><span class="line"></span><br><span class="line"> $sql = &quot;INSERT INTO user(username,password) VALUES(?,?)&quot;;</span><br><span class="line"></span><br><span class="line">//(2)预编译相同结构的sql语句,返回结果集对象</span><br><span class="line">$PDOStatement = $pdo-&gt;prepare($sql);</span><br><span class="line"></span><br><span class="line">//(3)给占位符绑定真正的数据</span><br><span class="line">$PDOStatement-&gt;bindValue(&quot;:username&quot;,&quot;henry&quot;);</span><br><span class="line">$PDOStatement-&gt;bindValue(&quot;:password&quot;,&quot;566&quot;);</span><br><span class="line"></span><br><span class="line">$PDOStatement-&gt;bindValue(&quot;1&quot;,&quot;henry&quot;);</span><br><span class="line">$PDOStatement-&gt;bindValue(&quot;2&quot;,&quot;566&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//(4)执行预编译sql语句</span><br><span class="line">$PDOStatement-&gt;execute();</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;PDO简介&quot;&gt;&lt;a href=&quot;#PDO简介&quot; class=&quot;headerlink&quot; title=&quot;PDO简介&quot;&gt;&lt;/a&gt;PDO简介&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;PDO: php data object&lt;/li&gt;
+&lt;li&gt;主要功能: 代替数据库操作类&lt;br&gt;&lt;/li
+      
+    
+    </summary>
+    
+    
+      <category term="PHP" scheme="http://yoursite.com/tags/PHP/"/>
+    
+      <category term="数据库" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title>[CSS]-高度坍塌问题</title>
