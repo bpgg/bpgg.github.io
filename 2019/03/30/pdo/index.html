@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="PDO简介 PDO: php data object 主要功能: 代替数据库操作类  PDO连接mysql 语法: PDO::_construct(string $dsn[,string $username[,string $password]])  $dsn:”dbtype:host=127.0.0.1;port=3306;dbname=itcast;charset=utf8”   PDO常用方">
+<meta name="description" content="PDO简介 PDO: php data object 主要功能: 代替数据库操作类  PDO连接mysql 语法: 1234567PDO::_construct(string $dsn[,string $username[,string $password]])$dsn = &amp;quot;mysql:host=127.0.0.1;port=3306;dbname=pdo_test&amp;quot;;$us">
 <meta name="keywords" content="PHP,数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[PHP]-PDO">
 <meta property="og:url" content="http://yoursite.com/2019/03/30/pdo/index.html">
 <meta property="og:site_name" content="一蓑烟雨任平生.">
-<meta property="og:description" content="PDO简介 PDO: php data object 主要功能: 代替数据库操作类  PDO连接mysql 语法: PDO::_construct(string $dsn[,string $username[,string $password]])  $dsn:”dbtype:host=127.0.0.1;port=3306;dbname=itcast;charset=utf8”   PDO常用方">
+<meta property="og:description" content="PDO简介 PDO: php data object 主要功能: 代替数据库操作类  PDO连接mysql 语法: 1234567PDO::_construct(string $dsn[,string $username[,string $password]])$dsn = &amp;quot;mysql:host=127.0.0.1;port=3306;dbname=pdo_test&amp;quot;;$us">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-30T02:15:32.584Z">
+<meta property="og:updated_time" content="2019-03-30T05:18:21.626Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[PHP]-PDO">
-<meta name="twitter:description" content="PDO简介 PDO: php data object 主要功能: 代替数据库操作类  PDO连接mysql 语法: PDO::_construct(string $dsn[,string $username[,string $password]])  $dsn:”dbtype:host=127.0.0.1;port=3306;dbname=itcast;charset=utf8”   PDO常用方">
+<meta name="twitter:description" content="PDO简介 PDO: php data object 主要功能: 代替数据库操作类  PDO连接mysql 语法: 1234567PDO::_construct(string $dsn[,string $username[,string $password]])$dsn = &amp;quot;mysql:host=127.0.0.1;port=3306;dbname=pdo_test&amp;quot;;$us">
 
 
 
@@ -325,11 +325,10 @@
 <li>主要功能: 代替数据库操作类<br></li>
 </ul>
 <h4 id="PDO连接mysql"><a href="#PDO连接mysql" class="headerlink" title="PDO连接mysql"></a>PDO连接mysql</h4><ul>
-<li><p>语法: <br><br><code>PDO::_construct(string $dsn[,string $username[,string $password]])</code><br></p>
-<ul>
-<li>$dsn:”dbtype:host=127.0.0.1;port=3306;dbname=itcast;charset=utf8”</li>
-</ul>
+<li>语法: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PDO::_construct(string $dsn[,string $username[,string $password]])</span><br><span class="line"></span><br><span class="line">$dsn = &quot;mysql:host=127.0.0.1;port=3306;dbname=pdo_test&quot;;</span><br><span class="line">$username = &apos;root&apos;;</span><br><span class="line">$password = &quot;root&quot;;</span><br><span class="line"></span><br><span class="line">$pdo = new PDO($dsn, $username, $password);</span><br></pre></td></tr></table></figure>
 </li>
+</ul>
+<ul>
 <li><p>PDO常用方法</p>
 <ol>
 <li>exec() 执行一条sql语句,返回受影响的行数  </li>
@@ -369,7 +368,7 @@
 <li>必须先设置错误报告模式(在网页直接显示错误或者警告信息)<br><br>  <code>$pdo-&gt;setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);</code></li>
 </ul>
 </li>
-<li>异常模式  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">    //要执行的sql语句</span><br><span class="line">&#125;catch(PDOException $e)&#123;</span><br><span class="line">    ehco &quot;错误行号:&quot;.$e-&gt;getLine();</span><br><span class="line">    ehco &quot;&lt;br&gt;错误文件:&quot;.$e-&gt;getFile();</span><br><span class="line">    ehco &quot;&lt;br&gt;错误状态码:&quot;.$e-&gt;getCode();</span><br><span class="line">    ehco &quot;&lt;br&gt;错误信息:&quot;.$e-&gt;getMessage();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>异常模式  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$pdo-&gt;setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);</span><br><span class="line">try&#123;</span><br><span class="line">    //要执行的sql语句</span><br><span class="line">&#125;catch(PDOException $e)&#123;</span><br><span class="line">    ehco &quot;错误行号:&quot;.$e-&gt;getLine();</span><br><span class="line">    ehco &quot;&lt;br&gt;错误文件:&quot;.$e-&gt;getFile();</span><br><span class="line">    ehco &quot;&lt;br&gt;错误状态码:&quot;.$e-&gt;getCode();</span><br><span class="line">    ehco &quot;&lt;br&gt;错误信息:&quot;.$e-&gt;getMessage();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="PDO预处理模式"><a href="#PDO预处理模式" class="headerlink" title="PDO预处理模式"></a>PDO预处理模式</h4><ul>
@@ -425,6 +424,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/30/smarty/" rel="prev" title="[Smarty]-简单用法">
+                [Smarty]-简单用法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -503,7 +506,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -516,7 +519,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
