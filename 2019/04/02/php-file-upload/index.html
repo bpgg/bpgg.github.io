@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="PHP,数据库,">
+  <meta name="keywords" content="PHP,">
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="PDO简介 PDO: php data object 主要功能: 代替数据库操作类  PDO连接mysql 语法: 1234567PDO::_construct(string $dsn[,string $username[,string $password]])$dsn = &amp;quot;mysql:host=127.0.0.1;port=3306;dbname=pdo_test&amp;quot;;$us">
-<meta name="keywords" content="PHP,数据库">
+<meta name="description" content="前端代码界面 注意: 上传文件格式: enctype=”multipart/form-data”1234567&amp;lt;form action=&amp;quot;upload_file.php&amp;quot; method=&amp;quot;post&amp;quot; enctype=&amp;quot;multipart/form-data&amp;quot;&amp;gt;    &amp;lt;label for=&amp;quot;file&amp;quot;">
+<meta name="keywords" content="PHP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[PHP]-PDO">
-<meta property="og:url" content="http://yoursite.com/2019/03/30/pdo/index.html">
+<meta property="og:title" content="[PHP]-获取上传的文件并保存">
+<meta property="og:url" content="http://yoursite.com/2019/04/02/php-file-upload/index.html">
 <meta property="og:site_name" content="一蓑烟雨任平生.">
-<meta property="og:description" content="PDO简介 PDO: php data object 主要功能: 代替数据库操作类  PDO连接mysql 语法: 1234567PDO::_construct(string $dsn[,string $username[,string $password]])$dsn = &amp;quot;mysql:host=127.0.0.1;port=3306;dbname=pdo_test&amp;quot;;$us">
+<meta property="og:description" content="前端代码界面 注意: 上传文件格式: enctype=”multipart/form-data”1234567&amp;lt;form action=&amp;quot;upload_file.php&amp;quot; method=&amp;quot;post&amp;quot; enctype=&amp;quot;multipart/form-data&amp;quot;&amp;gt;    &amp;lt;label for=&amp;quot;file&amp;quot;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-30T05:18:21.626Z">
+<meta property="og:updated_time" content="2019-04-02T05:41:44.306Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[PHP]-PDO">
-<meta name="twitter:description" content="PDO简介 PDO: php data object 主要功能: 代替数据库操作类  PDO连接mysql 语法: 1234567PDO::_construct(string $dsn[,string $username[,string $password]])$dsn = &amp;quot;mysql:host=127.0.0.1;port=3306;dbname=pdo_test&amp;quot;;$us">
+<meta name="twitter:title" content="[PHP]-获取上传的文件并保存">
+<meta name="twitter:description" content="前端代码界面 注意: 上传文件格式: enctype=”multipart/form-data”1234567&amp;lt;form action=&amp;quot;upload_file.php&amp;quot; method=&amp;quot;post&amp;quot; enctype=&amp;quot;multipart/form-data&amp;quot;&amp;gt;    &amp;lt;label for=&amp;quot;file&amp;quot;">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/30/pdo/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/02/php-file-upload/">
 
 
 
 
 
-  <title>[PHP]-PDO | 一蓑烟雨任平生.</title>
+  <title>[PHP]-获取上传的文件并保存 | 一蓑烟雨任平生.</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/30/pdo/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/02/php-file-upload/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李瑞恒">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">[PHP]-PDO</h1>
+          <h1 class="post-title" itemprop="name headline">[PHP]-获取上传的文件并保存</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-30T10:05:16+08:00">
-                2019-03-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-02T13:27:46+08:00">
+                2019-04-02
               </time>
             
 
@@ -320,70 +320,12 @@
       
 
       
-        <h3 id="PDO简介"><a href="#PDO简介" class="headerlink" title="PDO简介"></a>PDO简介</h3><ul>
-<li>PDO: php data object</li>
-<li>主要功能: 代替数据库操作类<br></li>
-</ul>
-<h4 id="PDO连接mysql"><a href="#PDO连接mysql" class="headerlink" title="PDO连接mysql"></a>PDO连接mysql</h4><ul>
-<li>语法: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PDO::_construct(string $dsn[,string $username[,string $password]])</span><br><span class="line"></span><br><span class="line">$dsn = &quot;mysql:host=127.0.0.1;port=3306;dbname=pdo_test&quot;;</span><br><span class="line">$username = &apos;root&apos;;</span><br><span class="line">$password = &quot;root&quot;;</span><br><span class="line"></span><br><span class="line">$pdo = new PDO($dsn, $username, $password);</span><br></pre></td></tr></table></figure>
+        <h3 id="前端代码界面"><a href="#前端代码界面" class="headerlink" title="前端代码界面"></a>前端代码界面</h3><ul>
+<li><strong>注意:</strong> 上传文件格式: enctype=”multipart/form-data”<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=&quot;upload_file.php&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">    &lt;label for=&quot;file&quot;&gt;Filename:&lt;/label&gt;</span><br><span class="line">    &lt;input type=&quot;file&quot; name=&quot;myFiles[]&quot; id=&quot;file1&quot; /&gt;</span><br><span class="line">    &lt;input type=&quot;file&quot; name=&quot;myFiles[]&quot; id=&quot;file2&quot; /&gt;</span><br><span class="line">    &lt;br /&gt;</span><br><span class="line">    &lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;Submit&quot; /&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<ul>
-<li><p>PDO常用方法</p>
-<ol>
-<li>exec() 执行一条sql语句,返回受影响的行数  </li>
-<li>query() 执行select,show语句,并返回一个结果集对象(PDOStatement)</li>
-<li>lastInsertId() 获取插入的记录的ID值</li>
-<li>setAttribute() 设置属性<br><br> <code>语法:bool PDO::setAttribute(int $attribute,mixed $value)</code></li>
-</ol>
-</li>
-<li><p>PDOStatement结果集对象常用方法:</p>
-<ol>
-<li><p>fetch() 获取结果集的一条记录,指针自动跳转<br><br> <code>mixed  PDOStatement::fetch([int $fetch_style])</code></p>
-</li>
-<li><p>fetchAll() 获取结果集的多条记录</p>
-</li>
-<li>fetchColumn() 返回结果集的单独一列,默认为0</li>
-<li>rowCount() 返回受上一个sql语句影响的行数</li>
-</ol>
-<ul>
-<li>常用foreach遍历  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foreach($PDOStatement as $arr)&#123;</span><br><span class="line">    print_r($arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="PDO错误处理模式"><a href="#PDO错误处理模式" class="headerlink" title="PDO错误处理模式:"></a>PDO错误处理模式:</h4><ul>
-<li>错误处理概述<ul>
-<li>静默模式:不显示任何错误(默认)</li>
-<li>警告模式:用PHP的错误等级来报告信息</li>
-<li>异常模式:先抛出异常,再处理异常</li>
-</ul>
-</li>
-<li>静默模式<br>  获取错误信息函数<br><ol>
-<li>PDO:errorCode(); 获取状态错误码.[00000]正常</li>
-<li>PDO:errorInfo(); 获取错误信息</li>
-</ol>
-</li>
-<li>警告模式<ul>
-<li>必须先设置错误报告模式(在网页直接显示错误或者警告信息)<br><br>  <code>$pdo-&gt;setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);</code></li>
-</ul>
-</li>
-<li>异常模式  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$pdo-&gt;setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);</span><br><span class="line">try&#123;</span><br><span class="line">    //要执行的sql语句</span><br><span class="line">&#125;catch(PDOException $e)&#123;</span><br><span class="line">    ehco &quot;错误行号:&quot;.$e-&gt;getLine();</span><br><span class="line">    ehco &quot;&lt;br&gt;错误文件:&quot;.$e-&gt;getFile();</span><br><span class="line">    ehco &quot;&lt;br&gt;错误状态码:&quot;.$e-&gt;getCode();</span><br><span class="line">    ehco &quot;&lt;br&gt;错误信息:&quot;.$e-&gt;getMessage();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="PDO预处理模式"><a href="#PDO预处理模式" class="headerlink" title="PDO预处理模式"></a>PDO预处理模式</h4><ul>
-<li>sql语句的执行(编译和执行)</li>
-<li>如果是第一次执行,先编译后执行,切编译过程非常复杂</li>
-<li>如果是第二次执行(相同sql语句),直接从缓存中读取,效率高,安全,有效防止sql语句注入.</li>
-</ul>
-<h5 id="预处理步骤"><a href="#预处理步骤" class="headerlink" title="预处理步骤"></a>预处理步骤</h5><ul>
-<li>先提取相同结构语句</li>
-<li>编译结构,保存结果</li>
-<li>再将不同数据部分替换 </li>
-<li>执行预处理语句</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//(1)使用占位符&quot;:value&quot;来代替真正的数据</span><br><span class="line"> $sql = &quot;INSERT INTO user(username,password) VALUES(:username,:password)&quot;;</span><br><span class="line"></span><br><span class="line"> $sql = &quot;INSERT INTO user(username,password) VALUES(?,?)&quot;;</span><br><span class="line"></span><br><span class="line">//(2)预编译相同结构的sql语句,返回结果集对象</span><br><span class="line">$PDOStatement = $pdo-&gt;prepare($sql);</span><br><span class="line"></span><br><span class="line">//(3)给占位符绑定真正的数据</span><br><span class="line">$PDOStatement-&gt;bindValue(&quot;:username&quot;,&quot;henry&quot;);</span><br><span class="line">$PDOStatement-&gt;bindValue(&quot;:password&quot;,&quot;566&quot;);</span><br><span class="line"></span><br><span class="line">$PDOStatement-&gt;bindValue(&quot;1&quot;,&quot;henry&quot;);</span><br><span class="line">$PDOStatement-&gt;bindValue(&quot;2&quot;,&quot;566&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//(4)执行预编译sql语句</span><br><span class="line">$PDOStatement-&gt;execute();</span><br></pre></td></tr></table></figure>
-
+<h3 id="PHP服务器代码"><a href="#PHP服务器代码" class="headerlink" title="PHP服务器代码"></a>PHP服务器代码</h3><h4 id="修改文件名-便于整理"><a href="#修改文件名-便于整理" class="headerlink" title="修改文件名,便于整理"></a>修改文件名,便于整理</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//1.获取文件后缀</span><br><span class="line">$suffix =  substr($file_name,strrpos($file_name,&apos;.&apos;));</span><br><span class="line"></span><br><span class="line">//2.生成独一无二的时间+随机数并组合</span><br><span class="line">$newFileNme = date(&apos;Ymdhis&apos;,time()).rand().$suffix;</span><br></pre></td></tr></table></figure>
+<h4 id="上传多个文件时-存于数组-便于操作"><a href="#上传多个文件时-存于数组-便于操作" class="headerlink" title="上传多个文件时,存于数组,便于操作."></a>上传多个文件时,存于数组,便于操作.</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">//将获取的文件对象以数组形式保存</span><br><span class="line">function reArrayFiles(&amp;$file_post) &#123;</span><br><span class="line"></span><br><span class="line">    $file_ary = array();</span><br><span class="line">    $file_count = count($file_post[&apos;name&apos;]);</span><br><span class="line">    $file_keys = array_keys($file_post);</span><br><span class="line"></span><br><span class="line">    for ($i=0; $i&lt;$file_count; $i++) &#123;</span><br><span class="line">        foreach ($file_keys as $key) &#123;</span><br><span class="line">            $file_ary[$i][$key] = $file_post[$key][$i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return $file_ary;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">if ($_FILES[&apos;myFiles&apos;]) &#123;</span><br><span class="line">    $file_ary = reArrayFiles($_FILES[&apos;myFiles&apos;]);</span><br><span class="line">     //遍历获取的文件</span><br><span class="line">    foreach ($file_ary as $file) &#123;</span><br><span class="line">        echo &apos;&lt;br&gt;&apos;;</span><br><span class="line">        print &apos;File Name: &apos; . $file[&apos;name&apos;].&apos;&lt;br&gt;&apos;;</span><br><span class="line">        print &apos;File Type: &apos; . $file[&apos;type&apos;].&apos;&lt;br&gt;&apos;;</span><br><span class="line">        print &apos;File Size: &apos; . $file[&apos;size&apos;].&apos;&lt;br&gt;&apos;;</span><br><span class="line">        print &apos;File Size: &apos; . $file[&apos;tmp_name&apos;].&apos;&lt;br&gt;&apos;;</span><br><span class="line"></span><br><span class="line">        //保存文件到指定的目录</span><br><span class="line">        //1.如果不将临时文件保存,临时文件会自动删除</span><br><span class="line">        //2.临时文件存放目录在php.ini中定义</span><br><span class="line"></span><br><span class="line">        if (file_exists(&quot;upload/&quot; . $file[&apos;name&apos;]))&#123;</span><br><span class="line">            echo $file[&apos;name&apos;] . &quot; already exists. &quot;;</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            move_uploaded_file($file[&apos;name&apos;],&quot;upload/&quot; . $file[&apos;tmp_name&apos;]);</span><br><span class="line">            echo &quot;Stored in: &quot; . &quot;upload/&quot; .$file[&apos;name&apos;];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -402,8 +344,6 @@
           
             <a href="/tags/PHP/" rel="tag"><i class="fa fa-tag"></i>PHP</a>
           
-            <a href="/tags/数据库/" rel="tag"><i class="fa fa-tag"></i>数据库</a>
-          
         </div>
       
 
@@ -415,8 +355,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/29/CSS-高度坍塌问题/" rel="next" title="[CSS]-高度坍塌问题">
-                <i class="fa fa-chevron-left"></i> [CSS]-高度坍塌问题
+              <a href="/2019/04/01/数据库设计/" rel="next" title="[DB]-数据库设计">
+                <i class="fa fa-chevron-left"></i> [DB]-数据库设计
               </a>
             
           </div>
@@ -425,8 +365,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/30/smarty/" rel="prev" title="[Smarty]-简单用法">
-                [Smarty]-简单用法 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/02/label-for/" rel="prev" title="[HTML]-Label标签">
+                [HTML]-Label标签 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -559,7 +499,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#PDO简介"><span class="nav-number">1.</span> <span class="nav-text">PDO简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PDO连接mysql"><span class="nav-number">1.1.</span> <span class="nav-text">PDO连接mysql</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PDO错误处理模式"><span class="nav-number">1.2.</span> <span class="nav-text">PDO错误处理模式:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PDO预处理模式"><span class="nav-number">1.3.</span> <span class="nav-text">PDO预处理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#预处理步骤"><span class="nav-number">1.3.1.</span> <span class="nav-text">预处理步骤</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前端代码界面"><span class="nav-number">1.</span> <span class="nav-text">前端代码界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP服务器代码"><span class="nav-number">2.</span> <span class="nav-text">PHP服务器代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改文件名-便于整理"><span class="nav-number">2.1.</span> <span class="nav-text">修改文件名,便于整理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上传多个文件时-存于数组-便于操作"><span class="nav-number">2.2.</span> <span class="nav-text">上传多个文件时,存于数组,便于操作.</span></a></li></ol></li></ol></div>
             
 
           </div>
