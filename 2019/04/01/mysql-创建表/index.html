@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据库,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一蓑烟雨任平生." type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="数据库设计简介 六个阶段  系统需求分析 概念结构设计 逻辑结构设计 物理结构设计 数据库的实施 数据库的运行与维护    系统需求分析1.需求分析的任务通过详细调查现实世界要处理的对象 (组织,部门,企业等), 充分了解原系统的工作概况(手工系统或计算机系统), 明确用户的各种需求, 然后在此基础上确定新系统的功能.  调查重点 信息要求, 用户需要获取的数据 处理要求, 用户要完成那些数据处理">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[DB]-数据库设计">
+<meta property="og:url" content="http://yoursite.com/2019/04/01/mysql-创建表/index.html">
+<meta property="og:site_name" content="一蓑烟雨任平生.">
+<meta property="og:description" content="数据库设计简介 六个阶段  系统需求分析 概念结构设计 逻辑结构设计 物理结构设计 数据库的实施 数据库的运行与维护    系统需求分析1.需求分析的任务通过详细调查现实世界要处理的对象 (组织,部门,企业等), 充分了解原系统的工作概况(手工系统或计算机系统), 明确用户的各种需求, 然后在此基础上确定新系统的功能.  调查重点 信息要求, 用户需要获取的数据 处理要求, 用户要完成那些数据处理">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-01T09:58:36.305Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[DB]-数据库设计">
+<meta name="twitter:description" content="数据库设计简介 六个阶段  系统需求分析 概念结构设计 逻辑结构设计 物理结构设计 数据库的实施 数据库的运行与维护    系统需求分析1.需求分析的任务通过详细调查现实世界要处理的对象 (组织,部门,企业等), 充分了解原系统的工作概况(手工系统或计算机系统), 明确用户的各种需求, 然后在此基础上确定新系统的功能.  调查重点 信息要求, 用户需要获取的数据 处理要求, 用户要完成那些数据处理">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/01/mysql-创建表/">
+
+
+
+
+
+  <title>[DB]-数据库设计 | 一蓑烟雨任平生.</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一蓑烟雨任平生.</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">stay hungry , stay foolish</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/01/mysql-创建表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李瑞恒">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/bpgg_portrait.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一蓑烟雨任平生.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[DB]-数据库设计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-01T17:55:32+08:00">
+                2019-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="数据库设计简介"><a href="#数据库设计简介" class="headerlink" title="数据库设计简介"></a>数据库设计简介</h2><ul>
+<li><p><strong>六个阶段</strong></p>
+<ul>
+<li>系统需求分析</li>
+<li>概念结构设计</li>
+<li>逻辑结构设计</li>
+<li>物理结构设计</li>
+<li>数据库的实施</li>
+<li>数据库的运行与维护</li>
+</ul>
+</li>
+</ul>
+<h2 id="系统需求分析"><a href="#系统需求分析" class="headerlink" title="系统需求分析"></a>系统需求分析</h2><h3 id="1-需求分析的任务"><a href="#1-需求分析的任务" class="headerlink" title="1.需求分析的任务"></a>1.需求分析的任务</h3><p>通过详细调查现实世界要处理的对象 (组织,部门,企业等), 充分了解原系统的工作概况(手工系统或计算机系统), 明确用户的各种需求, 然后在此基础上确定新系统的功能.</p>
+<ul>
+<li>调查重点<ul>
+<li>信息要求, 用户需要获取的数据</li>
+<li>处理要求, 用户要完成那些数据处理功能</li>
+<li>安全性和完整性要求</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-需求分析的方法"><a href="#2-需求分析的方法" class="headerlink" title="2.需求分析的方法"></a>2.需求分析的方法</h3><ul>
+<li>跟班作业</li>
+<li>询问</li>
+<li>设计用户调查表</li>
+<li>查阅记录, 查阅与原系统有关的数据记录</li>
+</ul>
+<h2 id="概念结构设计"><a href="#概念结构设计" class="headerlink" title="概念结构设计"></a>概念结构设计</h2><h3 id="1-概念结构设计简介"><a href="#1-概念结构设计简介" class="headerlink" title="1.概念结构设计简介"></a>1.概念结构设计简介</h3><blockquote>
+<p>从需求分析中找到实体，确认实体的属性、确认实体的关系，画出ER图。</p>
+</blockquote>
+<h3 id="2-概念设计结构步骤"><a href="#2-概念设计结构步骤" class="headerlink" title="2.概念设计结构步骤"></a>2.概念设计结构步骤</h3><blockquote>
+<p>需求分析数据–&gt;局部ER图–&gt;全局ER图</p>
+</blockquote>
+<ul>
+<li>合并局部ER图的关键是消除冲突<ul>
+<li>属性冲突</li>
+<li>命名冲突</li>
+<li>结构冲突</li>
+</ul>
+</li>
+</ul>
+<h2 id="逻辑结构设计"><a href="#逻辑结构设计" class="headerlink" title="逻辑结构设计"></a>逻辑结构设计</h2><h3 id="1-逻辑结构简介"><a href="#1-逻辑结构简介" class="headerlink" title="1.逻辑结构简介"></a>1.逻辑结构简介</h3><blockquote>
+<p>目的是将E-R图中的实体、属性和联系转换成为关系模式。</p>
+</blockquote>
+<h3 id="2-初始关系模型设计"><a href="#2-初始关系模型设计" class="headerlink" title="2.初始关系模型设计"></a>2.初始关系模型设计</h3><h4 id="实体间关系转换的原则"><a href="#实体间关系转换的原则" class="headerlink" title="实体间关系转换的原则"></a>实体间关系转换的原则</h4><ul>
+<li><p>一个实体转换为一个关系模式,实体的属性就是关系的属性,实体的键就是关系的键.</p>
+</li>
+<li><p>一个联系转为一个关系模式,与该联系相连的实体以及联系的属性都是该关系的属性.</p>
+<ul>
+<li>关系的键有三种情况:<ul>
+<li>联系1:1,每个实体的键都是关系的候选键</li>
+<li>联系1:n,则n端实体的键为关系的键</li>
+<li>联系n:m,则各实体键的组合为关系的键</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>三个或三个实体的多元联系的码是各实体的码组成的关系码或者关系码的一部分</li>
+<li>具有相同码的关系模式可以合并</li>
+</ul>
+<h4 id="实体间关系转换的规则"><a href="#实体间关系转换的规则" class="headerlink" title="实体间关系转换的规则"></a>实体间关系转换的规则</h4><ul>
+<li>一个1:1的关系可以转换为一个独立的关系模式,也可以与任意一端对应关系模式合并.</li>
+</ul>
+<h3 id="3-关系模式规范化"><a href="#3-关系模式规范化" class="headerlink" title="3.关系模式规范化"></a>3.关系模式规范化</h3><h4 id="三大范式"><a href="#三大范式" class="headerlink" title="三大范式"></a>三大范式</h4><ul>
+<li>1NF: 属性不可再分</li>
+</ul>
+<ul>
+<li><p>2NF: 在1NF基础上, 每一个非主属性完全函数依赖于<strong>任何</strong>一个候选码<br><br>( 每个表只描述一件事,每条记录有唯一标识列 )</p>
+</li>
+<li><p>3NF: 在2NF基础上, 每一个非主属性既不<strong>传递依赖</strong>与码,也不<strong>部分依赖</strong>于码. <br><br>( 数据库表不包含已在其它表中存在的非主属性 )</p>
+</li>
+</ul>
+<h2 id="物理结构设计"><a href="#物理结构设计" class="headerlink" title="物理结构设计"></a>物理结构设计</h2><h3 id="1-物理结构设计简介"><a href="#1-物理结构设计简介" class="headerlink" title="1.物理结构设计简介"></a>1.物理结构设计简介</h3><blockquote>
+<p>给逻辑模型, 选取最合适应用环境的物理结构</p>
+</blockquote>
+<h3 id="2-确定物理结构"><a href="#2-确定物理结构" class="headerlink" title="2.确定物理结构"></a>2.确定物理结构</h3><h4 id="存储结构的设计"><a href="#存储结构的设计" class="headerlink" title="存储结构的设计"></a>存储结构的设计</h4><h4 id="数据存取路径的设计"><a href="#数据存取路径的设计" class="headerlink" title="数据存取路径的设计"></a>数据存取路径的设计</h4><h4 id="数据存放位置的设计"><a href="#数据存放位置的设计" class="headerlink" title="数据存放位置的设计"></a>数据存放位置的设计</h4><h4 id="系统配置的设计"><a href="#系统配置的设计" class="headerlink" title="系统配置的设计"></a>系统配置的设计</h4><h3 id="3-评价物理结构"><a href="#3-评价物理结构" class="headerlink" title="3.评价物理结构"></a>3.评价物理结构</h3><ul>
+<li>定量估算各种方案的存储空间、存取时间和维护代价入手，对估算结果进行权衡、比较，选择出一个较优的合理的物理结构</li>
+</ul>
+<h2 id="数据库的实施"><a href="#数据库的实施" class="headerlink" title="数据库的实施"></a>数据库的实施</h2><h2 id="数据库的运行与维护"><a href="#数据库的运行与维护" class="headerlink" title="数据库的运行与维护"></a>数据库的运行与维护</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"><i class="fa fa-tag"></i>数据库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/31/php-命名空间/" rel="next" title="[PHP]-namespace">
+                <i class="fa fa-chevron-left"></i> [PHP]-namespace
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/02/php-文件上传/" rel="prev" title="[PHP]-获取上传的文件并保存">
+                [PHP]-获取上传的文件并保存 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/bpgg_portrait.jpg" alt="李瑞恒">
+            
+              <p class="site-author-name" itemprop="name">李瑞恒</p>
+              <p class="site-description motion-element" itemprop="description">这是对于个人学习知识的记录!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库设计简介"><span class="nav-number">1.</span> <span class="nav-text">数据库设计简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统需求分析"><span class="nav-number">2.</span> <span class="nav-text">系统需求分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-需求分析的任务"><span class="nav-number">2.1.</span> <span class="nav-text">1.需求分析的任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-需求分析的方法"><span class="nav-number">2.2.</span> <span class="nav-text">2.需求分析的方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念结构设计"><span class="nav-number">3.</span> <span class="nav-text">概念结构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概念结构设计简介"><span class="nav-number">3.1.</span> <span class="nav-text">1.概念结构设计简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-概念设计结构步骤"><span class="nav-number">3.2.</span> <span class="nav-text">2.概念设计结构步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑结构设计"><span class="nav-number">4.</span> <span class="nav-text">逻辑结构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-逻辑结构简介"><span class="nav-number">4.1.</span> <span class="nav-text">1.逻辑结构简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-初始关系模型设计"><span class="nav-number">4.2.</span> <span class="nav-text">2.初始关系模型设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实体间关系转换的原则"><span class="nav-number">4.2.1.</span> <span class="nav-text">实体间关系转换的原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实体间关系转换的规则"><span class="nav-number">4.2.2.</span> <span class="nav-text">实体间关系转换的规则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-关系模式规范化"><span class="nav-number">4.3.</span> <span class="nav-text">3.关系模式规范化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#三大范式"><span class="nav-number">4.3.1.</span> <span class="nav-text">三大范式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理结构设计"><span class="nav-number">5.</span> <span class="nav-text">物理结构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-物理结构设计简介"><span class="nav-number">5.1.</span> <span class="nav-text">1.物理结构设计简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-确定物理结构"><span class="nav-number">5.2.</span> <span class="nav-text">2.确定物理结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#存储结构的设计"><span class="nav-number">5.2.1.</span> <span class="nav-text">存储结构的设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据存取路径的设计"><span class="nav-number">5.2.2.</span> <span class="nav-text">数据存取路径的设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据存放位置的设计"><span class="nav-number">5.2.3.</span> <span class="nav-text">数据存放位置的设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统配置的设计"><span class="nav-number">5.2.4.</span> <span class="nav-text">系统配置的设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-评价物理结构"><span class="nav-number">5.3.</span> <span class="nav-text">3.评价物理结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的实施"><span class="nav-number">6.</span> <span class="nav-text">数据库的实施</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的运行与维护"><span class="nav-number">7.</span> <span class="nav-text">数据库的运行与维护</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李瑞恒</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
