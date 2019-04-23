@@ -88,14 +88,14 @@
 <meta property="og:site_name" content="一蓑烟雨任平生.">
 <meta property="og:description" content="JS的主线程及执行栈前言 JS是一门单线程语言，那为何能够实现异步操作呢？  单线程和异步操作确实不能同时成为一个语言的特性。JS本身不能实现异步，但是JS的宿主环境（浏览器，Node）是多线程的，宿主环境通过某种方式，使得JS具备了异步的特性。 浏览器JS是单线程语言，浏览器只分配给JS一个主线程，用来执行任务（函数），但一次只能执行一个任务，这些任务形成一个任务队列排队等候执行，但前端的某些任">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/04/23/js-单线程及异步/url">
-<meta property="og:image" content="http://yoursite.com/2019/04/23/js-单线程及异步/url">
-<meta property="og:image" content="http://yoursite.com/2019/04/23/js-单线程及异步/url">
-<meta property="og:updated_time" content="2019-04-23T09:00:14.267Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/bpgg/bpgg.github.io/master/img/event_loop.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/bpgg/bpgg.github.io/master/img/syncronous_exectuion.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/bpgg/bpgg.github.io/master/img/asyncronous_exectuion.png">
+<meta property="og:updated_time" content="2019-04-23T10:52:43.193Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[JS]-单线程及异步">
 <meta name="twitter:description" content="JS的主线程及执行栈前言 JS是一门单线程语言，那为何能够实现异步操作呢？  单线程和异步操作确实不能同时成为一个语言的特性。JS本身不能实现异步，但是JS的宿主环境（浏览器，Node）是多线程的，宿主环境通过某种方式，使得JS具备了异步的特性。 浏览器JS是单线程语言，浏览器只分配给JS一个主线程，用来执行任务（函数），但一次只能执行一个任务，这些任务形成一个任务队列排队等候执行，但前端的某些任">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/23/js-单线程及异步/url">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/bpgg/bpgg.github.io/master/img/event_loop.png">
 
 
 
@@ -336,7 +336,7 @@
 <h2 id="主线程"><a href="#主线程" class="headerlink" title="主线程"></a>主线程</h2><blockquote>
 <p>JS一直在做一个工作，就是从任务队列里提取任务，放到主线程里执行。</p>
 </blockquote>
-<p><img src="url" alt="event loop"></p>
+<p><img src="https://raw.githubusercontent.com/bpgg/bpgg.github.io/master/img/event_loop.png" alt="event loop"></p>
 <ul>
 <li>浏览器为异步任务开启的线程序=&gt;WebAPIs</li>
 <li>任务队列=&gt;callback queue</li>
@@ -371,11 +371,11 @@
 <ul>
 <li>同步执行</li>
 </ul>
-<p><img src="url" alt="同步与异步的对比"></p>
+<p><img src="https://raw.githubusercontent.com/bpgg/bpgg.github.io/master/img/syncronous_exectuion.png" alt="同步与异步的对比"></p>
 <ul>
 <li>异步执行</li>
 </ul>
-<p><img src="url" alt="同步与异步的对比"></p>
+<p><img src="https://raw.githubusercontent.com/bpgg/bpgg.github.io/master/img/asyncronous_exectuion.png" alt="同步与异步的对比"></p>
 </li>
 <li><p>使用场景</p>
 </li>
