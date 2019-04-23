@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一蓑烟雨任平生." type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="JS的主线程及执行栈前言 JS是一门单线程语言，那为何能够实现异步操作呢？  单线程和异步操作确实不能同时成为一个语言的特性。JS本身不能实现异步，但是JS的宿主环境（浏览器，Node）是多线程的，宿主环境通过某种方式，使得JS具备了异步的特性。 浏览器JS是单线程语言，浏览器只分配给JS一个主线程，用来执行任务（函数），但一次只能执行一个任务，这些任务形成一个任务队列排队等候执行，但前端的某些任">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[JS]-单线程及异步">
+<meta property="og:url" content="http://yoursite.com/2019/04/23/js-单线程及异步/index.html">
+<meta property="og:site_name" content="一蓑烟雨任平生.">
+<meta property="og:description" content="JS的主线程及执行栈前言 JS是一门单线程语言，那为何能够实现异步操作呢？  单线程和异步操作确实不能同时成为一个语言的特性。JS本身不能实现异步，但是JS的宿主环境（浏览器，Node）是多线程的，宿主环境通过某种方式，使得JS具备了异步的特性。 浏览器JS是单线程语言，浏览器只分配给JS一个主线程，用来执行任务（函数），但一次只能执行一个任务，这些任务形成一个任务队列排队等候执行，但前端的某些任">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/04/23/js-单线程及异步/url">
+<meta property="og:image" content="http://yoursite.com/2019/04/23/js-单线程及异步/url">
+<meta property="og:image" content="http://yoursite.com/2019/04/23/js-单线程及异步/url">
+<meta property="og:updated_time" content="2019-04-23T09:00:14.267Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[JS]-单线程及异步">
+<meta name="twitter:description" content="JS的主线程及执行栈前言 JS是一门单线程语言，那为何能够实现异步操作呢？  单线程和异步操作确实不能同时成为一个语言的特性。JS本身不能实现异步，但是JS的宿主环境（浏览器，Node）是多线程的，宿主环境通过某种方式，使得JS具备了异步的特性。 浏览器JS是单线程语言，浏览器只分配给JS一个主线程，用来执行任务（函数），但一次只能执行一个任务，这些任务形成一个任务队列排队等候执行，但前端的某些任">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/23/js-单线程及异步/url">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/23/js-单线程及异步/">
+
+
+
+
+
+  <title>[JS]-单线程及异步 | 一蓑烟雨任平生.</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一蓑烟雨任平生.</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">stay hungry , stay foolish</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/js-单线程及异步/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李瑞恒">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/bpgg_portrait.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一蓑烟雨任平生.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[JS]-单线程及异步</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-23T16:54:54+08:00">
+                2019-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="JS的主线程及执行栈"><a href="#JS的主线程及执行栈" class="headerlink" title="JS的主线程及执行栈"></a>JS的主线程及执行栈</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>JS是一门单线程语言，那为何能够实现异步操作呢？</p>
+</blockquote>
+<p>单线程和异步操作确实不能同时成为一个语言的特性。JS本身不能实现异步，但是JS的<strong>宿主环境</strong>（浏览器，Node）是多线程的，宿主环境通过某种方式，使得JS具备了异步的特性。</p>
+<h2 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h2><p>JS是单线程语言，浏览器只分配给JS一个主线程，用来执行任务（函数），但一次只能执行一个任务，这些任务形成一个任务队列排队等候执行，但前端的某些任务是非常耗时的，比如网络请求，定时器和事件监听，如果让他们和别的任务一样，都老老实实的排队等待执行的话，执行效率会非常的低，甚至导致页面的假死。</p>
+<blockquote>
+<p>浏览器为这些<strong>耗时任务</strong>开辟了另外的线程，主要包括<strong>http请求线程</strong>，<strong>浏览器定时触发器</strong>，<strong>浏览器事件触发线程</strong>，这些任务是异步的。</p>
+</blockquote>
+<h2 id="任务队列"><a href="#任务队列" class="headerlink" title="任务队列"></a>任务队列</h2><p>浏览器为这些异步任务单独开了一个线程，那么主线程是如何知道异步任务是否已经完成呢？这就需要依赖<strong>回调函数</strong>了，整个程序是靠事件驱动的，每个事件都有相应的回调函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'time up);</span></span><br><span class="line"><span class="string">&#125;,50)</span></span><br></pre></td></tr></table></figure>
+<h2 id="主线程"><a href="#主线程" class="headerlink" title="主线程"></a>主线程</h2><blockquote>
+<p>JS一直在做一个工作，就是从任务队列里提取任务，放到主线程里执行。</p>
+</blockquote>
+<p><img src="url" alt="event loop"></p>
+<ul>
+<li>浏览器为异步任务开启的线程序=&gt;WebAPIs</li>
+<li>任务队列=&gt;callback queue</li>
+<li>主线程<ul>
+<li>堆和栈</li>
+<li>函数的执行就是通过进栈和出栈实现</li>
+<li>栈stack清空时，说明一个任务已经执行完成，这时会从<code>callback queue</code>中寻找下一个任务推入栈中</li>
+</ul>
+</li>
+</ul>
+<h2 id="容易困惑的问题"><a href="#容易困惑的问题" class="headerlink" title="容易困惑的问题"></a>容易困惑的问题</h2><h3 id="setTimeout-f1-0-是否立即执行"><a href="#setTimeout-f1-0-是否立即执行" class="headerlink" title="setTimeout(f1,0)是否立即执行"></a><code>setTimeout(f1,0)</code>是否立即执行</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">&#125;,<span class="number">0</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// output =&gt; 2,1</span></span><br></pre></td></tr></table></figure>
+<p>当执行setTimeout后，浏览器会立即把匿名函数放入<code>callback queue</code>中，等待主线程的召唤，因为此时的stack还有<code>console.log(2)</code>尚未执行。等<code>console.log(2)</code>执行完毕后，才通过<code>event loop</code>把匿名函数放到stack中执行。</p>
+<ul>
+<li><p>结论：</p>
+<ul>
+<li><code>setTimeout(f1,0)</code>并非无意义，若f1是比较耗时的任务，又不在WebAPIs中，那就可以把它放到<code>callback queue</code>，等待主线程执行完毕后再执行。</li>
+<li>若当前代码执行时间很长，没有办法保证回调函数一定会在setTimeout指定的时间内完成。</li>
+</ul>
+</li>
+<li><p>补充说明：</p>
+<ul>
+<li>HTML5标准规定了setTimeout()的第二个参数的最小值（最短间隔），不得低于4毫秒，如果低于这个值，就会自动增加。在此之前，老版本的浏览器都将最短间隔设为10毫秒。</li>
+<li>DOM的变动（尤其是涉及页面重新渲染的部分），通常不会立即执行，而是每16毫秒执行一次。这时使用<code>requestAnimationFrame()</code>的效果要好于<code>setTimeout()</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="浏览器异步机制的使用"><a href="#浏览器异步机制的使用" class="headerlink" title="浏览器异步机制的使用"></a>浏览器异步机制的使用</h2><ul>
+<li>当我们自己需要写的程序中也有比较耗时的函数。可以通过浏览器提供给我们的<strong>浏览器定时事件</strong>和<strong>事件触发线程</strong>。</li>
+</ul>
+<h2 id="异步的好处和使用场景"><a href="#异步的好处和使用场景" class="headerlink" title="异步的好处和使用场景"></a>异步的好处和使用场景</h2><ul>
+<li><p>异步的好处</p>
+<ul>
+<li>同步执行</li>
+</ul>
+<p><img src="url" alt="同步与异步的对比"></p>
+<ul>
+<li>异步执行</li>
+</ul>
+<p><img src="url" alt="同步与异步的对比"></p>
+</li>
+<li><p>使用场景</p>
+</li>
+</ul>
+<p>程序需要大量I/O操作和用户请求时</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/17/webpack-基础/" rel="next" title="[webpack]-基础知识及配置">
+                <i class="fa fa-chevron-left"></i> [webpack]-基础知识及配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/bpgg_portrait.jpg" alt="李瑞恒">
+            
+              <p class="site-author-name" itemprop="name">李瑞恒</p>
+              <p class="site-description motion-element" itemprop="description">这是对于个人学习知识的记录!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JS的主线程及执行栈"><span class="nav-number">1.</span> <span class="nav-text">JS的主线程及执行栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器"><span class="nav-number">1.2.</span> <span class="nav-text">浏览器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务队列"><span class="nav-number">1.3.</span> <span class="nav-text">任务队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主线程"><span class="nav-number">1.4.</span> <span class="nav-text">主线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容易困惑的问题"><span class="nav-number">1.5.</span> <span class="nav-text">容易困惑的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setTimeout-f1-0-是否立即执行"><span class="nav-number">1.5.1.</span> <span class="nav-text">setTimeout(f1,0)是否立即执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器异步机制的使用"><span class="nav-number">1.6.</span> <span class="nav-text">浏览器异步机制的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步的好处和使用场景"><span class="nav-number">1.7.</span> <span class="nav-text">异步的好处和使用场景</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李瑞恒</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

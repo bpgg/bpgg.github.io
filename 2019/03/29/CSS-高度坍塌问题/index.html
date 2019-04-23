@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="浮动塌陷如果父元素只包含浮动元素,且未设置高度,那么它的高度将坍塌为0.因为浮动元素脱离了文档流,包含他们的父块没有内容,发生塌陷. 解决方案 使用clear属性的空元素 1&amp;lt;div style=&amp;quot;clear:both&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;  使用css的overflow属性 给浮动元素的容器添加:  1overflow:hidden||auto;  给浮动元">
+<meta name="description" content="浮动塌陷如果父元素只包含浮动元素,且未设置高度,那么它的高度将坍塌为0.因为浮动元素脱离了文档流,包含他们的父块没有内容,发生塌陷. 解决方案 使用clear属性的空元素  1&amp;lt;div style=&quot;clear:both&quot;&amp;gt;&amp;lt;/div&amp;gt;  使用css的overflow属性  给浮动元素的容器添加:  1overflow:hidden||auto;  给浮动元素的容器添加浮动">
 <meta name="keywords" content="CSS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[CSS]-高度坍塌问题">
 <meta property="og:url" content="http://yoursite.com/2019/03/29/CSS-高度坍塌问题/index.html">
 <meta property="og:site_name" content="一蓑烟雨任平生.">
-<meta property="og:description" content="浮动塌陷如果父元素只包含浮动元素,且未设置高度,那么它的高度将坍塌为0.因为浮动元素脱离了文档流,包含他们的父块没有内容,发生塌陷. 解决方案 使用clear属性的空元素 1&amp;lt;div style=&amp;quot;clear:both&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;  使用css的overflow属性 给浮动元素的容器添加:  1overflow:hidden||auto;  给浮动元">
+<meta property="og:description" content="浮动塌陷如果父元素只包含浮动元素,且未设置高度,那么它的高度将坍塌为0.因为浮动元素脱离了文档流,包含他们的父块没有内容,发生塌陷. 解决方案 使用clear属性的空元素  1&amp;lt;div style=&quot;clear:both&quot;&amp;gt;&amp;lt;/div&amp;gt;  使用css的overflow属性  给浮动元素的容器添加:  1overflow:hidden||auto;  给浮动元素的容器添加浮动">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-30T02:09:17.759Z">
+<meta property="og:updated_time" content="2019-04-23T09:05:06.558Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[CSS]-高度坍塌问题">
-<meta name="twitter:description" content="浮动塌陷如果父元素只包含浮动元素,且未设置高度,那么它的高度将坍塌为0.因为浮动元素脱离了文档流,包含他们的父块没有内容,发生塌陷. 解决方案 使用clear属性的空元素 1&amp;lt;div style=&amp;quot;clear:both&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;  使用css的overflow属性 给浮动元素的容器添加:  1overflow:hidden||auto;  给浮动元">
+<meta name="twitter:description" content="浮动塌陷如果父元素只包含浮动元素,且未设置高度,那么它的高度将坍塌为0.因为浮动元素脱离了文档流,包含他们的父块没有内容,发生塌陷. 解决方案 使用clear属性的空元素  1&amp;lt;div style=&quot;clear:both&quot;&amp;gt;&amp;lt;/div&amp;gt;  使用css的overflow属性  给浮动元素的容器添加:  1overflow:hidden||auto;  给浮动元素的容器添加浮动">
 
 
 
@@ -322,19 +322,20 @@
       
         <h3 id="浮动塌陷"><a href="#浮动塌陷" class="headerlink" title="浮动塌陷"></a>浮动塌陷</h3><p>如果父元素只包含浮动元素,且未设置高度,那么它的高度将坍塌为0.因为浮动元素脱离了文档流,包含他们的父块没有内容,发生塌陷.</p>
 <h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ul>
-<li><p>使用clear属性的空元素</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&quot;clear:both&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用css的overflow属性<br> 给浮动元素的容器添加: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">overflow:hidden||auto;</span><br></pre></td></tr></table></figure>
-</li>
+<li>使用clear属性的空元素</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"clear:both"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用css的overflow属性<br>  给浮动元素的容器添加:</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">overflow:hidden||auto;</span><br></pre></td></tr></table></figure>
+<ul>
 <li><p>给浮动元素的容器添加浮动</p>
 </li>
-</ul>
-<ul>
-<li>使用css的:after伪元素(推荐使用)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.cf:after &#123;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>使用css的:after伪元素(推荐使用)</p>
 </li>
 </ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.cf:after &#123;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -456,7 +457,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -469,7 +470,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
