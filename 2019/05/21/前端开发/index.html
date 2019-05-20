@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="JS,ES6,">
+  <meta name="keywords" content="面试,">
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="let let类似于var,但是声明的变量只在该代码块有效  不存在变量提升  暂时性死区  使用let声明变量之前,该变量不可使用   不允许重复声明   块级作用域 块级作用域的出现取代了立即执行函数.  1234567891011// IIFE 写法(function () &amp;#123;  var tmp = ...;  ...&amp;#125;());// 块级作用域写法&amp;#123;  let">
-<meta name="keywords" content="JS,ES6">
+<meta name="description" content="前端开发pc端，移动端 移动前端开发工程师，h5前端开发工程师，native前端开发工程师，Hybrid前端开发工程师  pc端  ie6-11，firefox，chrome，safari都得兼容css和js。  mobile端  webkit内核的浏览器和chrome，uc，qq，小米手机浏览器 移动端web app开发与 Hybrid 开发开发区别。移动端web app，移动端网页，Hybri">
+<meta name="keywords" content="面试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[ES6]-let&amp;const">
-<meta property="og:url" content="http://yoursite.com/2019/03/29/ES6-基础语法/index.html">
+<meta property="og:title" content="前端开发是什么?">
+<meta property="og:url" content="http://yoursite.com/2019/05/21/前端开发/index.html">
 <meta property="og:site_name" content="一蓑烟雨任平生.">
-<meta property="og:description" content="let let类似于var,但是声明的变量只在该代码块有效  不存在变量提升  暂时性死区  使用let声明变量之前,该变量不可使用   不允许重复声明   块级作用域 块级作用域的出现取代了立即执行函数.  1234567891011// IIFE 写法(function () &amp;#123;  var tmp = ...;  ...&amp;#125;());// 块级作用域写法&amp;#123;  let">
+<meta property="og:description" content="前端开发pc端，移动端 移动前端开发工程师，h5前端开发工程师，native前端开发工程师，Hybrid前端开发工程师  pc端  ie6-11，firefox，chrome，safari都得兼容css和js。  mobile端  webkit内核的浏览器和chrome，uc，qq，小米手机浏览器 移动端web app开发与 Hybrid 开发开发区别。移动端web app，移动端网页，Hybri">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-23T09:03:46.694Z">
+<meta property="og:updated_time" content="2019-05-20T16:58:52.137Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[ES6]-let&amp;const">
-<meta name="twitter:description" content="let let类似于var,但是声明的变量只在该代码块有效  不存在变量提升  暂时性死区  使用let声明变量之前,该变量不可使用   不允许重复声明   块级作用域 块级作用域的出现取代了立即执行函数.  1234567891011// IIFE 写法(function () &amp;#123;  var tmp = ...;  ...&amp;#125;());// 块级作用域写法&amp;#123;  let">
+<meta name="twitter:title" content="前端开发是什么?">
+<meta name="twitter:description" content="前端开发pc端，移动端 移动前端开发工程师，h5前端开发工程师，native前端开发工程师，Hybrid前端开发工程师  pc端  ie6-11，firefox，chrome，safari都得兼容css和js。  mobile端  webkit内核的浏览器和chrome，uc，qq，小米手机浏览器 移动端web app开发与 Hybrid 开发开发区别。移动端web app，移动端网页，Hybri">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/29/ES6-基础语法/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/21/前端开发/">
 
 
 
 
 
-  <title>[ES6]-let&const | 一蓑烟雨任平生.</title>
+  <title>前端开发是什么? | 一蓑烟雨任平生.</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/29/ES6-基础语法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/21/前端开发/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李瑞恒">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">[ES6]-let&const</h1>
+          <h1 class="post-title" itemprop="name headline">前端开发是什么?</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-29T18:44:01+08:00">
-                2019-03-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-21T00:57:45+08:00">
+                2019-05-21
               </time>
             
 
@@ -320,34 +320,45 @@
       
 
       
-        <h3 id="let"><a href="#let" class="headerlink" title="let"></a>let</h3><ol>
-<li><p>let类似于var,但是声明的变量只在该代码块有效</p>
-</li>
-<li><p>不存在变量提升</p>
-</li>
-<li><p>暂时性死区</p>
-<blockquote>
-<p>使用let声明变量之前,该变量不可使用</p>
-</blockquote>
-</li>
-<li><p>不允许重复声明</p>
-</li>
-</ol>
-<h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><ul>
-<li>块级作用域的出现取代了立即执行函数.</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// IIFE 写法</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> tmp = ...;</span><br><span class="line">  ...</span><br><span class="line">&#125;());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 块级作用域写法</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> tmp = ...;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="前端开发"><a href="#前端开发" class="headerlink" title="前端开发"></a>前端开发</h1><p>pc端，移动端</p>
+<p>移动前端开发工程师，h5前端开发工程师，native前端开发工程师，Hybrid前端开发工程师</p>
 <ul>
-<li>块级作用域可以多层嵌套</li>
-<li>不建议在块级作用域声明函数,如果需要,也应该使用函数表达式</li>
+<li>pc端</li>
 </ul>
-<h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><ol>
-<li><p><code>const</code>声明一个只读的常量,一旦声明,无法改变.<br><br>因此声明的同时必须立即赋值.</p>
+<p>ie6-11，firefox，chrome，safari都得兼容css和js。</p>
+<ul>
+<li>mobile端</li>
+</ul>
+<p>webkit内核的浏览器和chrome，uc，qq，小米手机浏览器</p>
+<h2 id="移动端web-app开发与-Hybrid-开发开发区别。"><a href="#移动端web-app开发与-Hybrid-开发开发区别。" class="headerlink" title="移动端web app开发与 Hybrid 开发开发区别。"></a>移动端web app开发与 Hybrid 开发开发区别。</h2><p>移动端web app，移动端网页，Hybrid开发</p>
+<h3 id="移动端web-app"><a href="#移动端web-app" class="headerlink" title="移动端web app"></a>移动端web app</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">    meta的作用：让普通移动网页被添加到主屏幕后，拥有一些类native的功能。</span></span><br><span class="line"><span class="comment">        ex: ios 隐藏上下状态栏，禁止弹性拖拽，修改顶部颜色，实现全屏等。</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-capable"</span> <span class="attr">content</span>=<span class="string">"yes"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>另一种类型：手机taobao，手机美团，手机微博的网页版。</p>
+<p>开发者把它们伪装成 web app 的交互体验。</p>
+<h3 id="普通移动端网页"><a href="#普通移动端网页" class="headerlink" title="普通移动端网页"></a>普通移动端网页</h3><p>手机新浪网，手机腾讯新闻</p>
+<h3 id="Hybrid开发"><a href="#Hybrid开发" class="headerlink" title="Hybrid开发"></a>Hybrid开发</h3><p>使用原生作为容器，web实现大部分功能。</p>
+<ul>
+<li>Hybrid是半Native半web开发模式</li>
+<li>成熟的Hybrid模式意味着业务逻辑均由H5实现</li>
+<li>成熟的Hybrid模式可复用性非常高,可以跨平台开发</li>
+</ul>
+<blockquote>
+<p>优点：资源是本地化的，所以可以使用比较重的框架，如angular，react，一些三方框架，因为最终都是通过和native代码捆绑发布的。</p>
+</blockquote>
+<h2 id="js-和-css"><a href="#js-和-css" class="headerlink" title="js 和 css"></a>js 和 css</h2><h3 id="js-的使用"><a href="#js-的使用" class="headerlink" title="js 的使用"></a>js 的使用</h3><blockquote>
+<p>少用框架，多手写。</p>
+</blockquote>
+<ul>
+<li><p>移动端的优化瓶颈：<br>网络加载速度不一致，有wifi，有3g，有4g，还有2g。</p>
 </li>
-<li><p>存在暂时性死区</p>
+<li><p><strong>代码量在移动端开发是很大的一个考察点。</strong></p>
 </li>
-<li><p>不可重复声明</p>
-</li>
+</ul>
+<h3 id="css-的使用"><a href="#css-的使用" class="headerlink" title="css 的使用"></a>css 的使用</h3><ol>
+<li>原生属性/特性的掌握</li>
+<li>很多属性极限突破可以使用缩放，倾斜这种手段来hack，比如最小字体，比如各种自己画的伪类图标</li>
+<li>能css画的不要用图。</li>
+<li>大小需要自适应的图标做成字体的不要画。</li>
+<li>能flex布局的不要用浮动，不要用绝对定位（不利于页面布局的扩展）</li>
 </ol>
 
       
@@ -366,9 +377,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JS/" rel="tag"><i class="fa fa-tag"></i>JS</a>
-          
-            <a href="/tags/ES6/" rel="tag"><i class="fa fa-tag"></i>ES6</a>
+            <a href="/tags/面试/" rel="tag"><i class="fa fa-tag"></i>面试</a>
           
         </div>
       
@@ -381,15 +390,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/05/19/面试-brower/" rel="next" title="[面试]-浏览器相关">
+                <i class="fa fa-chevron-left"></i> [面试]-浏览器相关
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/29/CSS-高度坍塌问题/" rel="prev" title="[CSS]-高度坍塌问题">
-                [CSS]-高度坍塌问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -521,7 +530,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#let"><span class="nav-number">1.</span> <span class="nav-text">let</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#块级作用域"><span class="nav-number">2.</span> <span class="nav-text">块级作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const"><span class="nav-number">3.</span> <span class="nav-text">const</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前端开发"><span class="nav-number">1.</span> <span class="nav-text">前端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#移动端web-app开发与-Hybrid-开发开发区别。"><span class="nav-number">1.1.</span> <span class="nav-text">移动端web app开发与 Hybrid 开发开发区别。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#移动端web-app"><span class="nav-number">1.1.1.</span> <span class="nav-text">移动端web app</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#普通移动端网页"><span class="nav-number">1.1.2.</span> <span class="nav-text">普通移动端网页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hybrid开发"><span class="nav-number">1.1.3.</span> <span class="nav-text">Hybrid开发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#js-和-css"><span class="nav-number">1.2.</span> <span class="nav-text">js 和 css</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#js-的使用"><span class="nav-number">1.2.1.</span> <span class="nav-text">js 的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css-的使用"><span class="nav-number">1.2.2.</span> <span class="nav-text">css 的使用</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

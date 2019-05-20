@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="面试,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一蓑烟雨任平生." type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="浏览器事件机制事件触发三阶段DOM2级事件规定的事件流包括三个阶段：事件的捕获阶段、处于目标阶段和事件冒泡阶段。  事件的捕获阶段：window往事件触发处传播，遇到注册的捕获事件会触发。 目标阶段：传播到事件触发处时触发注册的事件 冒泡阶段：从事件触发往window传播  事件触发一般会按照这三个阶段顺序执行。但也有特例，如果给一个目标节点同时注册冒泡和捕获事件，会按照事件注册的顺序执行 12n">
+<meta name="keywords" content="面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[面试]-浏览器相关">
+<meta property="og:url" content="http://yoursite.com/2019/05/19/面试-brower/index.html">
+<meta property="og:site_name" content="一蓑烟雨任平生.">
+<meta property="og:description" content="浏览器事件机制事件触发三阶段DOM2级事件规定的事件流包括三个阶段：事件的捕获阶段、处于目标阶段和事件冒泡阶段。  事件的捕获阶段：window往事件触发处传播，遇到注册的捕获事件会触发。 目标阶段：传播到事件触发处时触发注册的事件 冒泡阶段：从事件触发往window传播  事件触发一般会按照这三个阶段顺序执行。但也有特例，如果给一个目标节点同时注册冒泡和捕获事件，会按照事件注册的顺序执行 12n">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-18T16:13:34.723Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[面试]-浏览器相关">
+<meta name="twitter:description" content="浏览器事件机制事件触发三阶段DOM2级事件规定的事件流包括三个阶段：事件的捕获阶段、处于目标阶段和事件冒泡阶段。  事件的捕获阶段：window往事件触发处传播，遇到注册的捕获事件会触发。 目标阶段：传播到事件触发处时触发注册的事件 冒泡阶段：从事件触发往window传播  事件触发一般会按照这三个阶段顺序执行。但也有特例，如果给一个目标节点同时注册冒泡和捕获事件，会按照事件注册的顺序执行 12n">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/19/面试-brower/">
+
+
+
+
+
+  <title>[面试]-浏览器相关 | 一蓑烟雨任平生.</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一蓑烟雨任平生.</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">stay hungry , stay foolish</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/19/面试-brower/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李瑞恒">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/bpgg_portrait.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一蓑烟雨任平生.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[面试]-浏览器相关</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-19T00:10:40+08:00">
+                2019-05-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h1><h2 id="事件机制"><a href="#事件机制" class="headerlink" title="事件机制"></a>事件机制</h2><h3 id="事件触发三阶段"><a href="#事件触发三阶段" class="headerlink" title="事件触发三阶段"></a>事件触发三阶段</h3><p>DOM2级事件规定的事件流包括三个阶段：事件的捕获阶段、处于目标阶段和事件冒泡阶段。</p>
+<ul>
+<li>事件的捕获阶段：<code>window</code>往事件触发处传播，遇到注册的捕获事件会触发。</li>
+<li>目标阶段：传播到事件触发处时触发注册的事件</li>
+<li>冒泡阶段：从事件触发往<code>window</code>传播</li>
+</ul>
+<p>事件触发一般会按照这三个阶段顺序执行。但也有特例，如果给一个目标节点同时注册冒泡和捕获事件，会按照事件注册的顺序执行</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node.addEventListener(<span class="string">'click'</span>,e=&gt;<span class="built_in">console</span>.log(<span class="string">'冒泡'</span>),<span class="literal">false</span>)</span><br><span class="line">node.addEventListener(<span class="string">'click'</span>,e=&gt;<span class="built_in">console</span>.log(<span class="string">'捕获'</span>),<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="注册事件"><a href="#注册事件" class="headerlink" title="注册事件"></a>注册事件</h3><p><strong><code>EventTarget.addEventListener()</code></strong> 方法将指定的监听器注册到 <code>EventTarget</code> 上，当该对象触发指定的事件时，指定的回调函数就会被执行。 事件目标可以是一个文档上的元素 <code>Element</code>,<code>Document</code>和<code>Window</code>或者任何其他支持事件的对象 (比如 <code>XMLHttpRequest</code>)。</p>
+<p><code>addEventListener()</code>的工作原理是将实现<code>EventListener</code>的函数或对象添加到调用它的<code>EventTarget</code>上的指定事件类型的事件侦听器列表中。</p>
+<p>语法：</p>
+<blockquote>
+<p><code>target.addEventListener(type, listener[, options]);</code><br><br><code>target.addEventListener(type, listener[, useCapture]);</code></p>
+</blockquote>
+<p>参数：</p>
+<ul>
+<li><code>type</code>: 监听事件类型的字符创</li>
+<li><code>listener</code>：当所监听的事件类型触发时，会接收到一个事件通知</li>
+<li><code>options</code>：一个有关<code>listener</code>属性的可选参数对象<ul>
+<li><code>capture</code></li>
+<li><code>once</code>：Boolean，为<code>true</code>时，表示<code>listener</code>添加后只调用一次，调用完会清除<code>listener</code></li>
+<li><code>passive</code>：Boolean，为<code>true</code>时，表示listener不会调用<code>preventDefault()</code></li>
+</ul>
+</li>
+<li><code>useCapture</code>：Boolean，该类型事件捕获阶段传递到目标时触发</li>
+</ul>
+<h3 id="事件代理"><a href="#事件代理" class="headerlink" title="事件代理"></a>事件代理</h3><p>如果一个节点中的子节点是动态生成的，那么子节点需要注册事件的话应该注册在父节点上。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ul = <span class="built_in">document</span>.querySelector(<span class="string">'#ul'</span>)</span><br><span class="line">ul.addEventListener(<span class="string">'click'</span>, e =&gt; <span class="built_in">console</span>.log(e.target))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>优点<ul>
+<li>节省内存</li>
+<li>不需要给子节点注销事件</li>
+</ul>
+</li>
+</ul>
+<h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><p>浏览器出于安全考虑，有同源策略。所谓同源，就是同个协议，同个域名，同个端口。若不是同源，AJAX请求会失败。</p>
+<p>解决方案</p>
+<h3 id="JSOP"><a href="#JSOP" class="headerlink" title="JSOP"></a>JSOP</h3><p>JSONP利用<code>&lt;script&gt;</code>标签没有跨域限制的漏洞。通过<code>&lt;srcipt&gt;</code>标签指向一个目的地址并提供一个回调函数来接收数据。</p>
+<p>JSONP仅限于<code>get</code>请求</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"http://domain/api?param1=a&amp;param2=b&amp;callback=jsonp"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">jsonp</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(data)</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>CORS需要浏览器和后端同时支持。IE 8 和 9 需要通过 <code>XDomainRequest</code>来实现。</p>
+<p>浏览器会自动进行CORS通信，实现CORS关键在与后端。只要后端实现了CORS，就实现了跨域。</p>
+<p>服务端设置 <code>Access-Control-Allow-Origin</code> 就可以开启 CORS。 该属性表示哪些域名可以访问资源，如果设置通配符则表示所有网站都可以访问资源。</p>
+<h3 id="document-domain"><a href="#document-domain" class="headerlink" title="document.domain"></a>document.domain</h3><p>该方式只能用于二级域名相同的情况下。</p>
+<p><code>a.test.com</code>和<code>b.test.com</code>使用于该方式。</p>
+<p>只需要给页面添加 <code>document.domain = &#39;test.com&#39;</code></p>
+<h3 id="postMessage"><a href="#postMessage" class="headerlink" title="postMessage"></a>postMessage</h3><p>这种方式通常用于获取嵌入页面中的第三方页面数据。一个页面发送消息，另一个页面判断来源并接收消息</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//发送消息端</span></span><br><span class="line"><span class="built_in">window</span>.parent.postMessage(<span class="string">'message'</span>,<span class="string">'http://test.com'</span>)</span><br><span class="line"><span class="comment">//接收消息端</span></span><br><span class="line"><span class="keyword">var</span> mc = <span class="keyword">new</span> MessageChannel()</span><br><span class="line">mc.addEventListener(<span class="string">'message'</span>,e=&gt;&#123;</span><br><span class="line">    <span class="keyword">var</span> origin = e.origin || e.originalEvent.origin</span><br><span class="line">    <span class="keyword">if</span>(origin === <span class="string">'http://test.com'</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'pass'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="Event-loop"><a href="#Event-loop" class="headerlink" title="Event loop"></a>Event loop</h2><p>JS在执行过程中会产生执行环境，这些执行环境会被顺序加入到执行栈中。如果遇到异步的代码，会被挂起并加入到Task（有多种task）队列中。一旦执行栈为空，Event Loop 就会从 Task 队列中拿出需要执行的代码并放入执行栈中执行，所以本质上JS的异步还是同步行为。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">`script start`</span>)</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span><span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>),<span class="number">0</span>) <span class="comment">// HTML5规定，至少为4ms，因此还是属于异步。</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`script end`</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// script start -&gt; script end -&gt; setTimeout</span></span><br></pre></td></tr></table></figure>
+<p>不同的任务源会被分配到不同的Task队列中，任务源（microtask）和宏任务（marcrotask）。</p>
+<p>ES6规范中，microtask称为<code>jobs</code>，macrotask称为<code>task</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>微任务：<code>process.nextTick</code>，<code>promise</code>，<code>Object.observe</code>，<code>MutationObserver</code></p>
+<p>宏任务：<code>script</code>，<code>setTimeout</code>，<code>setInterval</code>，<code>setImmediate</code>，<code>I/O</code>，<code>UI rendering</code></p>
+<p>宏任务包括了<code>script</code>，浏览器会先执行一个宏任务，接下来有异步代码的话就执行微任务。</p>
+<h3 id="Event-loop-执行顺序"><a href="#Event-loop-执行顺序" class="headerlink" title="Event loop 执行顺序"></a>Event loop 执行顺序</h3><ol>
+<li>执行同步代码，属于宏任务</li>
+<li>执行栈为空，查询是否有微任务需要执行</li>
+<li>执行所以微任务</li>
+<li>必要的话渲染 UI</li>
+<li>开始下一轮 Event loop，执行宏任务中的异步代码</li>
+</ol>
+<p>因此，若宏任务中的异步代码有大量计算并且需要操作DOM，为了更好的界面响应，可以把操作DOM放入微任务中。</p>
+<h3 id="Node中的-Event-loop"><a href="#Node中的-Event-loop" class="headerlink" title="Node中的 Event loop"></a>Node中的 Event loop</h3><p>Node 的 Event loop 分为6个阶段</p>
+<ul>
+<li>timers</li>
+<li>I/O callbacks</li>
+<li>idle , prepare</li>
+<li>poll</li>
+<li>check</li>
+<li>close callbacks</li>
+</ul>
+<h2 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h2><h3 id="cookie，localStorage，sessionStorage，indexDB"><a href="#cookie，localStorage，sessionStorage，indexDB" class="headerlink" title="cookie，localStorage，sessionStorage，indexDB"></a><code>cookie</code>，<code>localStorage</code>，<code>sessionStorage</code>，<code>indexDB</code></h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>cookie</th>
+<th>localStorage</th>
+<th>sessionStorage</th>
+<th>indexDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据生命周期</td>
+<td>一般由服务器生成，可以设置过期时间</td>
+<td>除非被清理，否则一直存在</td>
+<td>页面关闭就清理</td>
+<td>除非被清理，否则一直存在</td>
+</tr>
+<tr>
+<td>数据存储大小</td>
+<td>4k</td>
+<td>5M</td>
+<td>5M</td>
+<td>无限</td>
+</tr>
+<tr>
+<td>与服务端通信</td>
+<td>每次都会携带在header中，对于请求性能影响</td>
+<td>不参与</td>
+<td>不参与</td>
+<td>不参与</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Service-Worker"><a href="#Service-Worker" class="headerlink" title="Service Worker"></a>Service Worker</h3><blockquote>
+<p>Srivice Worker 本质上充当 Web 应用程序和浏览器之间的代理服务器，也可以在网络可用时，作为浏览器和网络间的代理。它们旨在（除其他之外）使得能够创建有效的离线体验，拦截网络请求并基于网络是否可用以及更新的资源是否驻留在服务器上来采取适当的动作。他们还允许访问推送通知和后台同步 API。</p>
+</blockquote>
+<p>Service Worker 可以使你的应用先访问本地缓存资源，所以在离线状态时，在没有通过网络接收到更多的数据前，仍可以提供基本的功能（一般称之为 Offline First）。这是原生APP 本来就支持的功能，这也是相比于 web app，原生 app 更受青睐的主要原因。</p>
+<p>Service Worker 通常用来做缓存文件，提高首屏速度。</p>
+<h2 id="渲染机制"><a href="#渲染机制" class="headerlink" title="渲染机制"></a>渲染机制</h2><p>浏览器渲染机制的步骤：</p>
+<ol>
+<li>处理HTML并构建DOM树</li>
+<li>处理CSS并构建CSSDOM树</li>
+<li>合并DOM树和CSSDOM树为一颗渲染树</li>
+<li>根据渲染树布局，计算节点位置</li>
+<li>调用GPU绘制，合成图层，显示在屏幕上</li>
+</ol>
+<p>在构建CSSDOM时，会阻塞渲染，直至CSSDOM树完成。<br><br>构建CSSDOM十分消耗性能，所以应该保证层级扁平，减少过度层叠。</p>
+<p>当 HTML 解析到 script 标签时，会暂停构建 DOM，完成后才会从暂停的地方重新开始。也就是说，如果你想首屏渲染的越快，就越不应该在首屏就加载 JS 文件。并且 CSS 也会影响 JS 的执行，只有当解析完样式表才会执行 JS，所以也可以认为这种情况下，CSS 也会暂停构建 DOM。</p>
+<p>script影响DOM构建，CSS影响script执行-&gt; CSS影响DOM构建</p>
+<h3 id="Load-和-DOMContentLoaded-区别"><a href="#Load-和-DOMContentLoaded-区别" class="headerlink" title="Load 和 DOMContentLoaded 区别"></a>Load 和 DOMContentLoaded 区别</h3><p>Load触发，代表全部资源加载完毕。</p>
+<p>DOMContentLoaded表示初始的HTML被完全加载解析。</p>
+<h3 id="图层"><a href="#图层" class="headerlink" title="图层"></a>图层</h3><p>普通文档流可视为一个图层。<br><br>特定的属性可以生成一个新的图层。<br><br><strong>不同图层的渲染互不影响</strong>，某些需要频繁渲染的建议单独生成一个新图层，提高性能。</p>
+<p>常用的生成新图层的属性：</p>
+<ul>
+<li>3D变换：<code>translate3d</code>、<code>translateZ</code></li>
+<li><code>will-change</code></li>
+<li><code>video</code> <code>iframe</code> 标签</li>
+<li>通过动画实现的<code>opacity</code>动画转换</li>
+<li><code>postion:fixed</code></li>
+</ul>
+<h2 id="重绘（Repaint）和回流（Reflow）"><a href="#重绘（Repaint）和回流（Reflow）" class="headerlink" title="重绘（Repaint）和回流（Reflow）"></a>重绘（Repaint）和回流（Reflow）</h2><ul>
+<li>重绘：当需要改变节点外观不影响布局</li>
+<li>回流：布局或者集合属性需要改变</li>
+</ul>
+<p>回流必重绘，重绘不一定回流。</p>
+<p>以下几个动作可能导致性能问题：</p>
+<ul>
+<li>改变 window 大小</li>
+<li>改变字体</li>
+<li>添加或删除样式</li>
+<li>文字改变</li>
+<li>定位或者浮动</li>
+<li>盒模型</li>
+</ul>
+<p>重绘与回流与 Event loop 有关</p>
+<h3 id="减少重绘和回流"><a href="#减少重绘和回流" class="headerlink" title="减少重绘和回流"></a>减少重绘和回流</h3><ul>
+<li>使用<code>translate</code>代替<code>top</code></li>
+<li>使用<code>visibility</code>替换<code>display:none</code>（前者重绘，后者回流）</li>
+<li>DOM离线后修改。（先<code>display:none</code>，一次reflow），修改满意后，再显示出来。</li>
+<li>不要在循环中遍历DOM属性值</li>
+<li>不要用table布局，小改动容易影响整个布局</li>
+<li>动画实现的速度的选择，动画速度越快，回流次数越多</li>
+<li>CSS选择符从右往左匹配查找（从左到右会出现回溯的情况）</li>
+<li>将频繁运行的动画变为图层，图层能够阻止该节点回流影响别的元素。比如对于 video 标签，浏览器会自动将该节点变为图层。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试/" rel="tag"><i class="fa fa-tag"></i>面试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/11/面试-js/" rel="next" title="[JS]-js_interview">
+                <i class="fa fa-chevron-left"></i> [JS]-js_interview
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/21/前端开发/" rel="prev" title="前端开发是什么?">
+                前端开发是什么? <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/bpgg_portrait.jpg" alt="李瑞恒">
+            
+              <p class="site-author-name" itemprop="name">李瑞恒</p>
+              <p class="site-description motion-element" itemprop="description">这是对于个人学习知识的记录!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#浏览器"><span class="nav-number">1.</span> <span class="nav-text">浏览器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件机制"><span class="nav-number">1.1.</span> <span class="nav-text">事件机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件触发三阶段"><span class="nav-number">1.1.1.</span> <span class="nav-text">事件触发三阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注册事件"><span class="nav-number">1.1.2.</span> <span class="nav-text">注册事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件代理"><span class="nav-number">1.1.3.</span> <span class="nav-text">事件代理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域"><span class="nav-number">1.2.</span> <span class="nav-text">跨域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSOP"><span class="nav-number">1.2.1.</span> <span class="nav-text">JSOP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CORS"><span class="nav-number">1.2.2.</span> <span class="nav-text">CORS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#document-domain"><span class="nav-number">1.2.3.</span> <span class="nav-text">document.domain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postMessage"><span class="nav-number">1.2.4.</span> <span class="nav-text">postMessage</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-loop"><span class="nav-number">1.3.</span> <span class="nav-text">Event loop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-loop-执行顺序"><span class="nav-number">1.3.1.</span> <span class="nav-text">Event loop 执行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Node中的-Event-loop"><span class="nav-number">1.3.2.</span> <span class="nav-text">Node中的 Event loop</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储"><span class="nav-number">1.4.</span> <span class="nav-text">存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie，localStorage，sessionStorage，indexDB"><span class="nav-number">1.4.1.</span> <span class="nav-text">cookie，localStorage，sessionStorage，indexDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service-Worker"><span class="nav-number">1.4.2.</span> <span class="nav-text">Service Worker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渲染机制"><span class="nav-number">1.5.</span> <span class="nav-text">渲染机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Load-和-DOMContentLoaded-区别"><span class="nav-number">1.5.1.</span> <span class="nav-text">Load 和 DOMContentLoaded 区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图层"><span class="nav-number">1.5.2.</span> <span class="nav-text">图层</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重绘（Repaint）和回流（Reflow）"><span class="nav-number">1.6.</span> <span class="nav-text">重绘（Repaint）和回流（Reflow）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#减少重绘和回流"><span class="nav-number">1.6.1.</span> <span class="nav-text">减少重绘和回流</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李瑞恒</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
