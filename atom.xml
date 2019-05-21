@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-20T17:11:10.290Z</updated>
+  <updated>2019-05-21T16:10:08.779Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>何为HTML5</title>
+    <link href="http://yoursite.com/2019/05/21/%E4%BD%95%E4%B8%BAHTML5/"/>
+    <id>http://yoursite.com/2019/05/21/何为HTML5/</id>
+    <published>2019-05-21T15:57:55.000Z</published>
+    <updated>2019-05-21T16:10:08.779Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><p>HTML5 是一个<strong>标准</strong>，而不是一项技术。</p><p>标准即为大家遵守的准则，你可以按照标准做，甚至已更加严格标准要求自己。也可以不按照准则，像IE6那样，这样就没人和你玩了。</p><p>我们要么作为理论派讨论HTML5标准，或是作为实际派讨论HTML5标准在某浏览器中的应用。</p><p>但是实际上，人们口中的H5，并不是指标准或标准的应用，而是被硬生生造出来的奇怪概念的混合集。</p><p>甲方口中的H5，其实就是指那种炫酷的小界面。拆分出来有如下技术的点。</p><ul><li><p>页面素材预加载技术。</p></li><li><p>音乐加载播放技术。</p></li><li><p>支持滑动的界面。</p></li><li><p>可以涂鸦。</p></li><li><p>动态文字图片。</p></li><li><p>填表报名。</p></li><li><p>支持分享自定义文案和图片。</p></li><li><p>…</p></li></ul><p>所以我们在谈论H5时，实际上是一个<strong>解决方案</strong>，一个酷炫的移动端onpage网站的解决方案。</p><p>从某种程度上说，H5其实就是微信上的PPT。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;HTML5&quot;&gt;&lt;a href=&quot;#HTML5&quot; class=&quot;headerlink&quot; title=&quot;HTML5&quot;&gt;&lt;/a&gt;HTML5&lt;/h1&gt;&lt;p&gt;HTML5 是一个&lt;strong&gt;标准&lt;/strong&gt;，而不是一项技术。&lt;/p&gt;
+&lt;p&gt;标准即为大家遵守的准则，你
+      
+    
+    </summary>
+    
+    
+      <category term="HTML" scheme="http://yoursite.com/tags/HTML/"/>
+    
+  </entry>
   
   <entry>
     <title>何为Vuex</title>
