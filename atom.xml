@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-21T16:10:08.779Z</updated>
+  <updated>2019-05-22T10:26:27.302Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>何为SPA</title>
+    <link href="http://yoursite.com/2019/05/22/%E4%BD%95%E4%B8%BASPA/"/>
+    <id>http://yoursite.com/2019/05/22/何为SPA/</id>
+    <published>2019-05-22T10:15:09.000Z</published>
+    <updated>2019-05-22T10:26:27.302Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="SPA"><a href="#SPA" class="headerlink" title="SPA"></a>SPA</h1><p>SPA : ( <strong><code>Single Page Application</code></strong> )</p><h2 id="与传统多页应用的区别"><a href="#与传统多页应用的区别" class="headerlink" title="与传统多页应用的区别"></a>与传统多页应用的区别</h2><ul><li><p>传统多页应用：每次请求服务器返回的都是一个完整的单页面</p></li><li><p>单页面应用：只有第一次会加载页面，以后的请求只是为了获取必要的数据，由js解析，展示在页面中。</p></li></ul><h2 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h2><ul><li><p>优点</p><ol><li>减少请求的体积，加快页面的响应速度，降低服务器压力。 </li><li>更好的用户体验，web app 像 native app 那样流畅。</li></ol></li><li><p>缺点</p><p>  使用ajax，页面不利于seo。</p><p>  seo原则：搜索引擎在抓取页面的时候会屏蔽掉所有javascript代码，所以也就无法抓到ajax动态加载的数据。</p><ul><li>解决方案：<ol><li>服务端渲染</li><li>页面静态化  ( 为爬虫准备 )</li></ol></li></ul></li></ul><h2 id="主要技术"><a href="#主要技术" class="headerlink" title="主要技术"></a>主要技术</h2><ul><li>ajax</li><li><p>锚点的使用( <code>window.loacation.hash#</code> )</p></li><li><p><code>hashchange</code> 事件</p><p>  当URL的片段标识符更改时，将触发hashchange事件 (跟在＃符号后面的URL部分，包括＃符号)</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;SPA&quot;&gt;&lt;a href=&quot;#SPA&quot; class=&quot;headerlink&quot; title=&quot;SPA&quot;&gt;&lt;/a&gt;SPA&lt;/h1&gt;&lt;p&gt;SPA : ( &lt;strong&gt;&lt;code&gt;Single Page Application&lt;/code&gt;&lt;/strong&gt; )&lt;/p
+      
+    
+    </summary>
+    
+    
+      <category term="vue" scheme="http://yoursite.com/tags/vue/"/>
+    
+  </entry>
   
   <entry>
     <title>何为HTML5</title>

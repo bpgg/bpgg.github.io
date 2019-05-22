@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[何为SPA]]></title>
+    <url>%2F2019%2F05%2F22%2F%E4%BD%95%E4%B8%BASPA%2F</url>
+    <content type="text"><![CDATA[SPASPA : ( Single Page Application ) 与传统多页应用的区别 传统多页应用：每次请求服务器返回的都是一个完整的单页面 单页面应用：只有第一次会加载页面，以后的请求只是为了获取必要的数据，由js解析，展示在页面中。 优点与缺点 优点 减少请求的体积，加快页面的响应速度，降低服务器压力。 更好的用户体验，web app 像 native app 那样流畅。 缺点 使用ajax，页面不利于seo。 seo原则：搜索引擎在抓取页面的时候会屏蔽掉所有javascript代码，所以也就无法抓到ajax动态加载的数据。 解决方案： 服务端渲染 页面静态化 ( 为爬虫准备 ) 主要技术 ajax 锚点的使用( window.loacation.hash# ) hashchange 事件 当URL的片段标识符更改时，将触发hashchange事件 (跟在＃符号后面的URL部分，包括＃符号)]]></content>
+      <tags>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[何为HTML5]]></title>
     <url>%2F2019%2F05%2F21%2F%E4%BD%95%E4%B8%BAHTML5%2F</url>
     <content type="text"><![CDATA[HTML5HTML5 是一个标准，而不是一项技术。 标准即为大家遵守的准则，你可以按照标准做，甚至已更加严格标准要求自己。也可以不按照准则，像IE6那样，这样就没人和你玩了。 我们要么作为理论派讨论HTML5标准，或是作为实际派讨论HTML5标准在某浏览器中的应用。 但是实际上，人们口中的H5，并不是指标准或标准的应用，而是被硬生生造出来的奇怪概念的混合集。 甲方口中的H5，其实就是指那种炫酷的小界面。拆分出来有如下技术的点。 页面素材预加载技术。 音乐加载播放技术。 支持滑动的界面。 可以涂鸦。 动态文字图片。 填表报名。 支持分享自定义文案和图片。 … 所以我们在谈论H5时，实际上是一个解决方案，一个酷炫的移动端onpage网站的解决方案。 从某种程度上说，H5其实就是微信上的PPT。]]></content>
