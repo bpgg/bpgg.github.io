@@ -73,8 +73,6 @@
 
 
 
-  
-
 
   <link rel="alternate" href="/atom.xml" title="一蓑烟雨任平生." type="application/atom+xml">
 
@@ -91,7 +89,7 @@
 <meta property="og:site_name" content="一蓑烟雨任平生.">
 <meta property="og:description" content="Web WorkerWeb Worker : 为JavaScript引入线程技术使用Web Workers，Web应用程序可以在独立于主线程的后台线程中，运行一个脚本操作。 在独立线程中执行费时的处理任务，从而允许主线程（通常是UI线程）不会因此被阻塞/放慢。 主线程和 worker 线程相互之间使用 postMessage() 方法来发送信息, 并且通过 onmessage 这个 event h">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-26T18:12:07.970Z">
+<meta property="og:updated_time" content="2019-05-27T16:42:52.242Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webWorker">
 <meta name="twitter:description" content="Web WorkerWeb Worker : 为JavaScript引入线程技术使用Web Workers，Web应用程序可以在独立于主线程的后台线程中，运行一个脚本操作。 在独立线程中执行费时的处理任务，从而允许主线程（通常是UI线程）不会因此被阻塞/放慢。 主线程和 worker 线程相互之间使用 postMessage() 方法来发送信息, 并且通过 onmessage 这个 event h">
@@ -331,7 +329,10 @@
 </ul>
 <h2 id="专用-worker-案例"><a href="#专用-worker-案例" class="headerlink" title="专用 worker 案例"></a>专用 worker 案例</h2><p>将你输入的2个数字作乘法。输入的数字会发送给一个专用worker，由专用worker作乘法后，再返回给页面进行展示。</p>
 <blockquote>
-<p>注意：在主线程中使用时，onmessage和postMessage() 必须挂在worker对象上，而在worker中使用时不用这样做。原因是，在worker内部，worker是有效的全局作用域。<br><br><br>注意： 当一个消息在主线程和worker之间传递时，它被复制或者转移了，而不是共享。</p>
+<p>注意：在主线程中使用时，onmessage和postMessage() 必须挂在worker对象上，而在worker中使用时不用这样做。原因是，在worker内部，worker是有效的全局作用域。</p>
+</blockquote>
+<blockquote>
+<p>注意： 当一个消息在主线程和worker之间传递时，它被复制或者转移了，而不是共享。</p>
 </blockquote>
 <ul>
 <li>worker.js</li>
@@ -443,6 +444,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/05/28/nodejs-入门1-简单应用/" rel="prev" title="nodejs-入门1-简单应用">
+                nodejs-入门1-简单应用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -520,7 +525,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -533,7 +538,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
